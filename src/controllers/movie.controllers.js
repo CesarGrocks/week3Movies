@@ -38,22 +38,38 @@ const update = catchError(async(req, res) => {
     return res.json(result[1][0]);
 });
 
+//relaciones
+
 //?/movies/:Id/genres
 const setGenres = catchError(async (req, res) => {
-  //identificar la movie
-  const { id } = req.params
-  const movie = await Movie.findByPk(id)
+  const { id } = req.params;  //identificar la movie
+  const movie = await Movie.findByPk(id);
+  await movie.setGenres(req.body);  //seteo de los generos a las movies
+  const genres = await movie.getGenres();   //Obtener el seteo, para tener la vista con metodo get
+  return res.json(genres);  //retorno final
 
-  //seteo de los generos a las movies
-  await movie.setGenres(req.body)
+});
 
-  //Obtener el seteo, para tener la vista
-  const genres = await movie.getGenres()
+// movies:id/directors
+const setDirectors = catchError(async(req, res) => {
+    const { id } = req.params;
+    const movie = await Movie.findByPk(id);
+    await movie.setDirectors(req.body);
+    const directors = await movie.getDirectors();
+    return res.json(directors);
+});
 
-  //retorno final
-  return res.json(genres)
-
+//movies:id/actors
+const setActors = catchError(async(req, res) => {
+    const { id } = req.params;
+    const movie = await Movie.findByPk(id);
+    await movie.setActors(req.body);
+    const actors = await movie.getActors();
+    return res.json(actors);
 })
+
+
+
 
 module.exports = {
     getAll,
@@ -61,5 +77,7 @@ module.exports = {
     getOne,
     remove,
     update,
-    setGenres
+    setGenres,
+    setDirectors,
+    setActors
 }
