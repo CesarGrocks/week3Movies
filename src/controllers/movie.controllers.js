@@ -42,7 +42,7 @@ const update = catchError(async(req, res) => {
 
 //?/movies/:Id/genres
 const setGenres = catchError(async (req, res) => {
-  const { id } = req.params;  //identificar la movie
+  const { id } = req.params;  //identificar la movie por id
   const movie = await Movie.findByPk(id);
   await movie.setGenres(req.body);  //seteo de los generos a las movies
   const genres = await movie.getGenres();   //Obtener el seteo, para tener la vista con metodo get
