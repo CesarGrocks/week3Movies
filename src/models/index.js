@@ -8,9 +8,9 @@ Movie.belongsToMany(Genre, { through: 'movies_genres' })  //una pelicula pertene
 Genre.belongsToMany(Movie, { through: 'movies_genres' }) //relacion un genero pertenece a muchas peliculas 
 
 // Movies/:id/actors
-Movie.belongsToMany(Actor, { through: 'Movie_actors' })
-Genre.belongsToMany(Movie, { through: 'Movie_actors' })
+Movie.belongsToMany(Actor, { through: 'Movies_actors' })
+Actor.belongsToMany(Movie, { through: 'Movies_actors' })
 
 // Movies/:id/directors
-Movie.belongsToMany(Director, { through: 'Movie_directors' })
-Director.belongsToMany(Movie, { through: 'Movie_directors' })
+Movie.belongsToMany(Director, { through: 'Movies_directors' })
+Director.belongsToMany(Movie, { through: 'Movies_directors' })
